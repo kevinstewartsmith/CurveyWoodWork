@@ -13,11 +13,11 @@ import UIKit
 class RandomCurveTile: UIView {
 
     var path: UIBezierPath!
-     
+    var lastX = Int.random(in: 1 ... 50)
     override init(frame: CGRect) {
         super.init(frame: frame)
      
-        self.backgroundColor = UIColor.orange
+        self.backgroundColor = UIColor.white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,17 +57,21 @@ class RandomCurveTile: UIView {
 
             // More coming 1...
             let backgroundMountains = CGMutablePath()
-            backgroundMountains.move(to: CGPoint(x: 138, y: -2), transform: .identity)
+            backgroundMountains.move(to: CGPoint(x: 25, y: 0), transform: .identity)
             //backgroundMountains.addQuadCurve(to: CGPoint(x: 77, y: 157),
     //                                         control: CGPoint(x: 30, y: 129),
     //                                         transform: .identity)
             
-            let number = Int.random(in: 0 ..< 200)
-            backgroundMountains.addCurve(to: CGPoint(x: number, y: 242),
-            control1: CGPoint(x: Int.random(in: -210 ..< -10), y: Int.random(in: 30 ..< 180)),
-            control2: CGPoint(x: Int.random(in: 180 ..< 340), y: Int.random(in: 80 ..< 220)),
-            transform: .identity)
-
+            let number = Int.random(in: 10 ..< 40)
+            print("first number: \(number)")
+//            backgroundMountains.addCurve(to: CGPoint(x: 20, y: 100),
+//                                         control1: CGPoint(x: -20, y:  00),
+//                                         control2: CGPoint(x: 70, y: 100),
+//            transform: .identity)
+            backgroundMountains.addQuadCurve(to: CGPoint(x: 20, y: 100), control: CGPoint(x: Int.random(in: -80 ... 80), y:  Int.random(in: 20 ... 60)))
+            lastX = number
+            print("second number: \(number)")
+            print(lastX)
 
             // More coming 2...
         //    backgroundMountains.addQuadCurve(to: CGPoint(x: 77, y: 157),
@@ -75,7 +79,7 @@ class RandomCurveTile: UIView {
             
             // Background Mountain Stroking
             context.addPath(backgroundMountains)
-            context.setStrokeColor(UIColor.white.cgColor)
+            context.setStrokeColor(UIColor.black.cgColor)
             context.setLineWidth(5)
             context.strokePath()
 
